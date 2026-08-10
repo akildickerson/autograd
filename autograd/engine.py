@@ -4,10 +4,10 @@ import math
 class Value:
     """stores single value and its gradient"""
 
-    def __init__(self, data, _childern=()):
+    def __init__(self, data, _children=()):
         self.data = data
         self.grad = 0.0
-        self._prev = set(_childern)
+        self._prev = set(_children)
         self._backward = lambda: None
 
     def __add__(self, other):
@@ -38,7 +38,7 @@ class Value:
         out = Value(max(0, self.data), _children=(self,))
 
         def _backward():
-            self.grad += (0 > out) * out.grad
+            self.grad += (self.data > 0) * out.grad
 
         out._backward = _backward
 
