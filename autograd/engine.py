@@ -57,7 +57,7 @@ class Value:
         return out
 
     def __pow__(self, other):
-        out = Value(self.data**other, (self), _children=(self,))
+        out = Value(self.data**other, _children=(self,))
 
         def _backward():
             self.grad += (other * self.data ** (other - 1)) * out.grad
